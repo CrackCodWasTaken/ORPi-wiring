@@ -15,7 +15,12 @@ commands are simple
 
 YOU MUST USE GPIO!! NOT PHYSICAL PIN NUMBERS OR SUNXI NAMES OF PINS!!
 
+
+
 pinmode(GPIO, State) -- used to set a GPIO as input or output and export, to do this you must either put "in"(Input) or "out"(output) IN STRING!
+
 write(GPIO, State) -- used to set a GPIO either HIGH or LOW, to do this either put state as 1(HIGH) or 0(LOW)
+
 unexport(GPIO) -- used to unexport a GPIO when you done using it
+
 readpin(GPIO) -- used to read value of a GPIO, this return the value of the GPIO as a int
