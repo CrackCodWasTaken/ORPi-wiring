@@ -1,2 +1,7 @@
 # ORPi-wiring
 this is a very basic library that can make GPIO easier for you.  this library has been tested on orange pi zero 2w.
+I made it becuase I couldnt find a good solution for GPIO since every library i found was either not supported by orange pi zero 2w
+or not working properly, you can modify the library and its extermely simple with only one script and a few lines of code. of course it
+does work with raspberry pi librarys for tools requiring such a wiring library since this ones VERY basic and only designed to export, change state, unexport a pin
+
+ill add reading a certain pin in a bit.
