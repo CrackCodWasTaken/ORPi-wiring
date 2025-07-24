@@ -19,3 +19,14 @@ def write(PinNum, State):
 
 def unexport(PinNum):
         os.system(f"echo {PinNum} > /sys/class/gpio/unexport")
+
+def readpin(PinNum):
+    try:
+        with open(f"/sys/class/gpio/gpio{PinNum}/value", "r") as f:
+            return int(f.read().strip())
+    except FileNotFoundError:
+        print(f"GPIO {PinNum} not exported!")
+        return None
+    except Exception as e:
+        print(f"Error reading GPIO {PinNum}: {e}")
+        return None
