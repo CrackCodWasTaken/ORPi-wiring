@@ -5,3 +5,8 @@ or not working properly, you can modify the library and its extermely simple wit
 does work with raspberry pi librarys for tools requiring such a wiring library since this ones VERY basic and only designed to export, change state, unexport a pin
 
 ill add reading a certain pin in a bit.
+
+
+how to use:
+
+simply download the file and include it in your project.
