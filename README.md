@@ -14,9 +14,9 @@ I dont know if analoge functionality is there but ill try to make a function for
   
 |  UPDATE LOG! V2.0:--------------------------------------------------------|
 
-|  * Added Physical Pin support///////////////////////////////////////////|
+|  * Added Physical Pin support---------------------------------------------|
 
-|  * Added Custom Layout support//////////////////////////////////////////|
+|  * Added Custom Layout support--------------------------------------------|
 
 + ----------------------------------------------------------------------- +
 
