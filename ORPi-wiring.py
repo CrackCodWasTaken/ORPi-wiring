@@ -109,154 +109,131 @@ UsingPins = "OPiZero2W"
 
 
 
+
+
+
 def pinmode(PinNum, State):
-    assert State in ["in", "out"], "State must be 'in' or 'out'"
+	assert State in ["in", "out"], "State must be 'in' or 'out'"
+	
+	layout = None
+	index = PinNum - 1
+	GPIOnum = PinNum
 
-    layout = None
-    index = PinNum - 1
-    GPIOnum = PinNum
+	if UsingPins == "OPiZero2W":
+		layout = OPiZero2WLayout
+	elif UsingPins == "Custom":
+		layout = CustomLayout
+	elif UsingPins == "GPIO":
+		print("Found GPIO Layout")
+		layout = "GPIO"
+	else:
+		raise ValueError(f"Unsupported layout type: {UsingPins}")
+		return
 
-    if UsingPins == "OPiZero2W":
-        layout = OPiZero2WLayout
-    elif UsingPins == "Custom":
-        layout = CustomLayout
-    elif UsingPins == "GPIO":
-        print("Found GPIO Layout")
-    else:
-        raise ValueError(f"Unsupported layout type: {UsingPins}")
-        return
+	if layout != "GPIO":
+		if layout[index] != " ":
+			PinNum = layout[index]
+		else:
+			print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
+			return
+	else:
+		print("Using GPIO Layout")
+		PinNum = GPIOnum
 
-    if layout:
-        if layout[index] != " ":
-            PinNum = layout[index]  # Translate pin number to GPIO number
-        else:
-            print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
-            return
-    else:
-        print("Using GPIO Layout")
-        PinNum = GPIOnum
-
-    os.system(f"echo {PinNum} > /sys/class/gpio/export")
-    os.system(f"echo {State} > /sys/class/gpio/gpio{PinNum}/direction")
-
+	os.system(f"echo {PinNum} > /sys/class/gpio/export")
+	os.system(f"echo {State} > /sys/class/gpio/gpio{PinNum}/direction")
 
 def write(PinNum, State):
-    layout = None
-    index = PinNum - 1
-    GPIOnum = PinNum
+	layout = None
+	index = PinNum - 1
+	GPIOnum = PinNum
 
-    if UsingPins == "OPiZero2W":
-        layout = OPiZero2WLayout
-    elif UsingPins == "Custom":
-        layout = CustomLayout
-    elif UsingPins == "GPIO":
-        print("Found GPIO Layout")
-    else:
-        raise ValueError(f"Unsupported layout type: {UsingPins}")
-        return
+	if UsingPins == "OPiZero2W":
+		layout = OPiZero2WLayout
+	elif UsingPins == "Custom":
+		layout = CustomLayout
+	elif UsingPins == "GPIO":
+		print("Found GPIO Layout")
+	else:
+		raise ValueError(f"Unsupported layout type: {UsingPins}")
+		return
 
-    if layout:
-        if layout[index] != " ":
-            PinNum = layout[index]  # Translate pin number to GPIO number
-        else:
-            print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
-            return
-    else:
-        print("Using GPIO Layout")
-        PinNum = GPIOnum
+	if layout:
+		if layout[index] != " ":
+			PinNum = layout[index]
+		else:
+			print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
+			return
+	else:
+		print("Using GPIO Layout")
+		PinNum = GPIOnum
 
-    assert State in [0, 1], "State must be 0 (Low) or 1 (High)"
-    os.system(f"echo {State} > /sys/class/gpio/gpio{PinNum}/value")
-
-
-
-
-
-
-
+	assert State in [0, 1], "State must be 0 (Low) or 1 (High)"
+	os.system(f"echo {State} > /sys/class/gpio/gpio{PinNum}/value")
 
 def unexport(PinNum):
-    layout = None
-    index = PinNum - 1
-    GPIOnum = PinNum
+	layout = None
+	index = PinNum - 1
+	GPIOnum = PinNum
 
-    if UsingPins == "OPiZero2W":
-        layout = OPiZero2WLayout
-    elif UsingPins == "Custom":
-        layout = CustomLayout
-    elif UsingPins == "GPIO":
-        print("Found GPIO Layout")
-    else:
-        raise ValueError(f"Unsupported layout type: {UsingPins}")
-        return
+	if UsingPins == "OPiZero2W":
+		layout = OPiZero2WLayout
+	elif UsingPins == "Custom":
+		layout = CustomLayout
+	elif UsingPins == "GPIO":
+		print("Found GPIO Layout")
+	else:
+		raise ValueError(f"Unsupported layout type: {UsingPins}")
+		return
 
-    if layout:
-        if layout[index] != " ":
-            PinNum = layout[index]  # Translate pin number to GPIO number
-        else:
-            print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
-            return
-    else:
-        print("Using GPIO Layout")
-        PinNum = GPIOnum
+	if layout:
+		if layout[index] != " ":
+			PinNum = layout[index]
+		else:
+			print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
+			return
+	else:
+		print("Using GPIO Layout")
+		PinNum = GPIOnum
 
-
-
-    os.system(f"echo {PinNum} > /sys/class/gpio/unexport")
-
-
-
+	os.system(f"echo {PinNum} > /sys/class/gpio/unexport")
 
 def readpin(PinNum):
-    layout = None
-    index = PinNum - 1
-    GPIOnum = PinNum
+	layout = None
+	index = PinNum - 1
+	GPIOnum = PinNum
 
-    if UsingPins == "OPiZero2W":
-        layout = OPiZero2WLayout
-    elif UsingPins == "Custom":
-        layout = CustomLayout
-    elif UsingPins == "GPIO":
-        print("Found GPIO Layout")
-    else:
-        raise ValueError(f"Unsupported layout type: {UsingPins}")
-        return
+	if UsingPins == "OPiZero2W":
+		layout = OPiZero2WLayout
+	elif UsingPins == "Custom":
+		layout = CustomLayout
+	elif UsingPins == "GPIO":
+		print("Found GPIO Layout")
+	else:
+		raise ValueError(f"Unsupported layout type: {UsingPins}")
+		return
 
-    if layout:
-        if layout[index] != " ":
-            PinNum = layout[index]  # Translate pin number to GPIO number
-        else:
-            print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
-            return
-    else:
-        print("Using GPIO Layout")
-        PinNum = GPIOnum
+	if layout:
+		if layout[index] != " ":
+			PinNum = layout[index]
+		else:
+			print(f"Pin {PinNum} is not usable (e.g., GND or VCC)")
+			return
+	else:
+		print("Using GPIO Layout")
+		PinNum = GPIOnum
 
-
-
-    try:
-        with open(f"/sys/class/gpio/gpio{PinNum}/value", "r") as f:
-            return int(f.read().strip())
-    except FileNotFoundError:
-        print(f"GPIO {PinNum} not exported!")
-        return None
-    except Exception as e:
-        print(f"Error reading GPIO {PinNum}: {e}")
-        return None
-
-
-
-
-
-
-# BOARDMODE this is allow using custom pin names/numbers for spesific GPIO, this allows for compaitbility across all orange pi boards that use linux
-
-
+	try:
+		with open(f"/sys/class/gpio/gpio{PinNum}/value", "r") as f:
+			return int(f.read().strip())
+	except FileNotFoundError:
+		print(f"GPIO {PinNum} not exported!")
+		return None
+	except Exception as e:
+		print(f"Error reading GPIO {PinNum}: {e}")
+		return None
 
 def boardmode(BOARDMODE):
-	assert BOARDMODE in ["OPiZero2W", "Custom", "GPIO"], "BOARDMODE can be set premade(OPiZero2W), Custom(needs to be configured in ORPi-wiring.py) or GPIO(Uses GPIO numbers)"
+	global UsingPins
+	assert BOARDMODE in ["OPiZero2W", "Custom", "GPIO"], "BOARDMODE can be OPiZero2W, Custom, or GPIO"
 	UsingPins = BOARDMODE
-	
-
-
-
