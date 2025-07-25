@@ -4,23 +4,53 @@ I made it becuase I couldnt find a good solution for GPIO since every library i 
 or not working properly, you can modify the library and its extermely simple with only one script and a few lines of code. of course it
 does work with raspberry pi librarys for tools requiring such a wiring library since this ones VERY basic and only designed to export, change state, unexport a pin, read a pin
 
-i dont know if analoge functionality is there but ill try to make a function for analogWrite and ill try adding a export all feature to export all pins used
 
-
-how to use:
-
-simply download the file and include it in your project.
-
-commands are simple
-
-YOU MUST USE GPIO!! NOT PHYSICAL PIN NUMBERS OR SUNXI NAMES OF PINS!!
+I dont know if analoge functionality is there but ill try to make a function for analogWrite and ill try adding a export all feature to export all pins used
 
 
 
-pinmode(GPIO, State) -- used to set a GPIO as input or output and export, to do this you must either put "in"(Input) or "out"(output) IN STRING!
++ ----------------------------------------------------------------------- +
+|  UPDATE LOG! V2.0:                                                      |
+|  * Added Physical Pin support                                           |
+|  * Added Custom Layout support                                          |
++ ----------------------------------------------------------------------- +
 
-write(GPIO, State) -- used to set a GPIO either HIGH or LOW, to do this either put state as 1(HIGH) or 0(LOW)
 
-unexport(GPIO) -- used to unexport a GPIO when you done using it
 
-readpin(GPIO) -- used to read value of a GPIO, this return the value of the GPIO as a int
+
+HOW TO USE!
+
+1. Download the latest ORPi-wiring.py file
+2. move the file in the same directory as your project
+3. add "import ORPi-wiring as GPIO" at the top of your project
+4. select boardmode using GPIO.boardmode() list of board modes are below 
+
+List of Default supported Boards:
+* Orange pi zero 2w
+
+NOTE!!
+more board support coming soon however you can include your own board config by editing the ORPi-wiring.py file all instructions are in it as well
+
+
+
+
+
+
+COMMANDS TO USE THE LIBRARY!
+
+
+boardmode(BOARDMODE) -- used to set boardmode to use either physical pins
+
+pinmode(PIN, State) -- used to set a GPIO/PIN as input or output and export, to do this you must either put "in"(Input) or "out"(output) IN STRING!
+
+write(PIN, State) -- used to set a GPIO/PIN either HIGH or LOW, to do this either put state as 1(HIGH) or 0(LOW)
+
+unexport(PIN) -- used to unexport a GPIO/PIN when you done using it
+
+readpin(PIN) -- used to read value of a GPIO/PIN, this return the value of the GPIO as a int
+
+NOTE!!
+analoge MIGHT work, I havent tested analoge yet however the logic for readpin is simple, it returns the value of the pin in /sys/class/gpio/gpio(PIN)/value
+
+
+
